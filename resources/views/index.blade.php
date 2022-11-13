@@ -20,6 +20,12 @@
             </div>
         </form>
 
+        @if (session('status'))
+            <div class="alert alert-success text-center">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <div class="table-responsive">
             <table class="table table-bordered text-center">
                 <thead>
@@ -34,8 +40,9 @@
                         <tr>
                             <td>{{ $todo->name }}</td>
                             <td>{{($todo->status == 1 ? 'Done' : 'In Progress')}}</td>
-                            <td>
-                                <a href="{{ route('update',$todo->id) }}" class="btn btn-info {{($todo->status == 1 ? 'd-none' : '')}}">Change Status</a>
+                            <td class="w-25">
+                                <a href="{{ route('edit',$todo->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('update', ['id' => $todo->id, 'status' => (int) $todo->status]) }}" class="btn btn-info">Change Status</a>
                                 <a href="{{ route('destroy',$todo->id) }}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>

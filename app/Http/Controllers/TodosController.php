@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\todos;
+use App\Models\Todo;
 use App\Http\Requests\StoretodosRequest;
 use App\Http\Requests\UpdatetodosRequest;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
 class TodosController extends Controller
 {
 
     public function index(){
-        $todos = DB::table('todos')->get();
+        $todos = DB::table('todo')->orderBy('id')->get();
         return view('index', compact('todos'));
     }
 
@@ -22,14 +23,12 @@ class TodosController extends Controller
      */
     public function create() {
         $name = \request("name");
-        DB::table('todos')->insert([
+        DB::table('todo')->insert([
             'name' => $name,
             'status' => 0
         ]);
 
-
-        $todos = DB::table('todos')->get();
-        return view('index', compact('todos'));
+        return redirect()->back()->with('status', 'Task Added');
     }
 
     /**
@@ -46,10 +45,10 @@ class TodosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\Todo  $todos
      * @return \Illuminate\Http\Response
      */
-    public function show(todos $todos)
+    public function show(todo $todos)
     {
         //
     }
@@ -57,10 +56,10 @@ class TodosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\Todo  $todos
      * @return \Illuminate\Http\Response
      */
-    public function edit(todos $todos)
+    public function edit(todo $todos)
     {
         //
     }
@@ -69,28 +68,24 @@ class TodosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdatetodosRequest  $request
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\Todo  $todos
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($id, $status)
     {
-        DB::update('UPDATE todos SET status = true where id = ?', [$id]);
-
-        $todos = DB::table('todos')->get();
-        return view('index', compact('todos'));
+        DB::table('todo')->where('id', $id)->where('status', $status)->update(['status' => !$status]);
+        return redirect()->back()->with('status', 'Task updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\Todo  $todos
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        DB::delete('DELETE FROM todos WHERE id = ?', [$id]);
-
-        $todos = DB::table('todos')->get();
-        return view('index', compact('todos'));
+        DB::table('todo')->where('id', $id)->delete();
+        return redirect()->back()->with('status', 'Deleted');;
     }
 }

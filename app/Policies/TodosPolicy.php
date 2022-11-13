@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\todos;
+use App\Models\todo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TodosPolicy
@@ -25,10 +25,10 @@ class TodosPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\todo  $todos
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, todos $todos)
+    public function view(User $user, todo $todos)
     {
         //
     }
@@ -48,10 +48,10 @@ class TodosPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\todo  $todos
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, todos $todos)
+    public function update(User $user, todo $todos)
     {
         //
     }
@@ -60,10 +60,10 @@ class TodosPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\todo  $todos
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, todos $todos)
+    public function delete(User $user, todo $todos)
     {
         //
     }
@@ -72,10 +72,10 @@ class TodosPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\todo  $todos
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, todos $todos)
+    public function restore(User $user, todo $todos)
     {
         //
     }
@@ -84,10 +84,10 @@ class TodosPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\todos  $todos
+     * @param  \App\Models\todo  $todos
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, todos $todos)
+    public function forceDelete(User $user, todo $todos)
     {
         //
     }

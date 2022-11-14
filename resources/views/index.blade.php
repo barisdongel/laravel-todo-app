@@ -40,10 +40,21 @@
                         <tr>
                             <td>{{ $todo->name }}</td>
                             <td>{{($todo->status == 1 ? 'Done' : 'In Progress')}}</td>
-                            <td class="w-25">
-                                <a href="{{ route('edit',$todo->id) }}" class="btn btn-success">Edit</a>
-                                <a href="{{ route('update', ['id' => $todo->id, 'status' => (int) $todo->status]) }}" class="btn btn-info">Change Status</a>
-                                <a href="{{ route('destroy',$todo->id) }}" class="btn btn-danger">Delete</a>
+                            <td class="d-flex justify-content-center">
+                                <div class="dropdown mx-2">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Edit
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <form action="/edit" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $todo->id }}">
+                                            <input type="text" class="form-control" name="edit" placeholder="Edit task...">
+                                        </form>
+                                    </ul>
+                                </div>
+                                <a href="{{ route('update', ['id' => $todo->id, 'status' => (int) $todo->status]) }}" class="mx-2 btn btn-info">Change Status</a>
+                                <a href="{{ route('destroy',$todo->id) }}" class="mx-2 btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

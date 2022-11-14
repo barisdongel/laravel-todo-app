@@ -59,9 +59,13 @@ class TodosController extends Controller
      * @param  \App\Models\Todo  $todos
      * @return \Illuminate\Http\Response
      */
-    public function edit(todo $todos)
+    public function edit()
     {
-        //
+        $id = \request("id");
+        $name = \request("edit");
+
+        DB::table('todo')->where('id', $id)->update(['name' => $name]);
+        return redirect()->back()->with('status', 'Task updated!');
     }
 
     /**

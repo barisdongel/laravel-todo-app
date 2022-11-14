@@ -18,5 +18,5 @@ Route::get('/', [TodosController::class, 'index']);
 Route::get('/index', [TodosController::class, 'index']);
 Route::post('/create', [TodosController::class, 'create']);
 Route::get('delete/{id}', [TodosController::class, 'destroy'])->name('destroy');
-Route::get('edit/{id}', [TodosController::class, 'edit'])->name('edit');
+Route::post('/edit', [TodosController::class, 'edit']);
 Route::get('change/{id}/{status}', [TodosController::class, 'update'])->name('update');
